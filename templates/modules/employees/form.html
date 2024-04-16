@@ -1,0 +1,41 @@
+{% extends 'base/form.html' %}
+
+{% block form_title %}Crear nuevo empleado{% endblock %}
+
+{% block form_route %}/create-new-employee{% endblock %}
+
+{% block form_img %}{{ url_for('static', filename='imgs/employee.png') }}{% endblock %}
+{% block input_name_placeholder %}Escriba el nombre del empleado{% endblock %}
+
+{% block form_fields_left %}
+    <div class="form-field">
+        <label for="lastname">Apellido: </label>
+        <input type="text" name="lastname" placeholder="Escriba su apellido" required>
+    </div>
+    <div class="form-field">
+        <label for="address">Dirección: </label>
+        <input type="text" name="address" placeholder="Escriba su dirección" required>
+    </div>
+{% endblock %}
+
+{% block form_fields_right %}
+    <div class="form-field">
+        <label for="code">Clave: </label>
+        <input type="text" name="code" placeholder="Escriba clave de empleado" required>
+    </div>
+    <div class="form-field">
+        <label for="role">Posición: </label>
+        <input type="text" name="role" placeholder="Escriba posición del empleado" required>
+    </div>
+    <div class="form-field">
+        <label for="pharmacy">Trabaja en: </label>
+        <select name="pharmacy" id="pharmacy" required>
+            <option selected>Selecciona una farmacia</option>
+            {% for pharmacy in pharmacies %}
+                <option value="{{pharmacy.id}}">{{pharmacy.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}
+
+{% block action_return %}/pharmacies{% endblock %}

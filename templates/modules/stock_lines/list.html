@@ -1,0 +1,83 @@
+{% extends 'base/list.html' %}
+
+{% block create_new %}
+    <h2>Inventarios</h2>
+
+    <a href="/stock-lines-form">Crear</a>
+{% endblock %}
+
+{% block filter_form %}/filtered-stock-lines{% endblock %}
+{% block searchbar_fields %}
+    {% for filter_value, filter_name in filters.items() %}
+        <option value="{{filter_value}}">{{filter_name}}</option>
+    {% endfor %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="main--content--list--table">
+        <div class="content--list--headers--stock">
+            <ul>
+                <li>Folio</li>
+                <li>Fecha</li>
+                <li>Cantidad</li>
+            </ul>
+        </div>
+        <div id="stock-lines-list" class="content--list--parent">
+                {% for pharmacy_id, pharmacy_data in pharmacies.items() %}
+                    {% if pharmacy_data.get('products') %}
+                        <li class="pharmacy-row" id="pharmacy-{{ pharmacy_id }}"> > {{ pharmacy_data.name }}</li>
+                        <div class="product-list" id="products-{{pharmacy_id}}" style="display: none;">
+                            {% for product_id, product_data in pharmacy_data.get('products').items() %}
+                                {% if product_data.get('lines') %}
+                                    <li class="product-row" id="product-{{ product_id }}">&nbsp;&nbsp;&nbsp;&nbsp;> {{product_data.get('name')}}</li>
+                                    <div class="line-list" id="line-{{pharmacy_id}}-{{product_id}}" style="display: none;">
+                                        {% for line in product_data.get('lines') %}
+                                                <li class="line-row">
+                                                    <p>{{line.name}}</p>
+                                                    <p>{{line.date}}</p>
+                                                    <p>{{line.stock}}</p>
+                                                </li>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+        </div>     
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var pharmacy_rows = document.querySelectorAll(".pharmacy-row");
+        
+        pharmacy_rows.forEach(function(row) {
+            row.addEventListener("click", function() {
+                var pharmacy_id = this.id.split("-")[1];
+                var product_list = document.getElementById("products-" + pharmacy_id);
+                
+                if (product_list.style.display === "none" || product_list.style.display === "") {
+                    product_list.style.display = "block";
+                } else {
+                    product_list.style.display = "none";
+                }
+            });
+        });
+
+        var product_rows = document.querySelectorAll(".product-row");
+        product_rows.forEach(function(product_row) {
+            product_row.addEventListener("click", function() {
+                var pharmacy_id = this.parentElement.id.split("-")[1];
+                var product_id = this.id.split("-")[1]
+                var line_list = document.getElementById("line-" + pharmacy_id + "-" + product_id);
+                console.log(product_id)
+                
+                if (line_list.style.display === "none" || line_list.style.display === "") {
+                    line_list.style.display = "block";
+                } else {
+                    line_list.style.display = "none";
+                }
+            });
+        });
+    });
+    </script>    
+{% endblock %}

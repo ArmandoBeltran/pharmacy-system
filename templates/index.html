@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <title>Sistema de Distribuidores Fármacos</title>
+</head>
+<body>
+    <div id="home" class="home__section">
+        <div class="home--visuals">
+            <div class="home--visuals--text">
+                <h1>Sistema de Distribuidores Fármacos</h1>
+                <p>Luis Armando Beltrán Martínez</p>
+            </div>
+            <div class="home--visuals--vector">
+                <img src="{{ url_for('static', filename='imgs/medicine.png') }}">
+            </div>
+        </div>
+        <div class="home--buttons">
+            <a href="/pharmacies">
+                <div class="home--button--image">
+                    <img src="{{ url_for('static', filename='imgs/pharmacy.png') }}">
+                </div>
+                <p>Farmacias</p>
+            </a>
+            <a href="/employees">
+                <div class="home--button--image">
+                    <img src="{{ url_for('static', filename='imgs/employee.png') }}">
+                </div>
+                <p>Empleados</p>
+            </a>
+            <a href="/stock-lines">
+                <div class="home--button--image">
+                    <img src="{{ url_for('static', filename='imgs/inventory.png') }}">
+                </div>
+                <p>Inventarios</p>
+            </a>
+            <a href="/products">
+                <div class="home--button--image">
+                    <img src="{{ url_for('static', filename='imgs/product.png') }}">
+                </div>
+                <p>Productos</p>
+            </a>
+            <a href="/laboratories">
+                <div class="home--button--image">
+                    <img src="{{ url_for('static', filename='imgs/laboratory.png') }}">
+                </div>
+                <p>Laboratorios</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

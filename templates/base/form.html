@@ -1,0 +1,34 @@
+{% extends 'base/header.html' %}
+
+{% block tools %}
+    <div class="main--tools--form--actions">
+        <h2>{% block form_title %}{% endblock %}</h2>
+    </div>
+{% endblock %}
+
+{% block main_content %}
+    <form class="form" action="{% block form_route %}{% endblock %}" method="post">
+        <div class="form--fields--section">
+            <div class="form--header">
+                <div class="form--header--img">
+                    <img src="{% block form_img %} {% endblock %}">
+                </div>
+                <input type="text" name="name" placeholder="{% block input_name_placeholder %}{% endblock %}" required>
+            </div>
+            <div class="form--fields">
+                <div class="form--fields--left">
+                    {% block form_fields_left %}
+                    {% endblock %}
+                </div>
+                <div class="form--fields--right">
+                    {% block form_fields_right %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="form--actions">
+            <input type="submit" value="Guardar"/>
+            <a href="{% block action_return %}{% endblock %}">Regresar</a>
+        </div>
+    </form>
+{% endblock %}

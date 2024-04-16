@@ -1,0 +1,24 @@
+{% extends 'base/form.html' %}
+
+{% block form_title %}Agregar nuevo laboratorio{% endblock %}
+
+{% block form_route %}/create-new-laboratory{% endblock %}
+
+{% block form_img %}{{ url_for('static', filename='imgs/laboratory.png') }}{% endblock %}
+{% block input_name_placeholder %}Escriba el nombre del laboratorio{% endblock %}
+
+{% block form_fields_left %}
+    <div class="form-field">
+        <label for="address">Dirección: </label>
+        <input type="text" name="address" placeholder="Escriba la dirección física del laboratorio" required>
+    </div>
+{% endblock %}
+
+{% block form_fields_right %}
+    <div class="form-field">
+        <label for="phone">Teléfono: </label>
+        <input type="text" name="phone" placeholder="Escriba el número telefónico del laboratorio" required>
+    </div>
+{% endblock %}
+
+{% block action_return %}/laboratories{% endblock %}

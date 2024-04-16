@@ -1,0 +1,20 @@
+{% extends 'base/header.html' %}
+
+{% block tools %}
+    <div class="main--tools--create">
+        {% block create_new %}
+
+        {% endblock %}
+    </div>
+    <div class="main--tools--searchbar">
+        <form action="{% block filter_form %}{% endblock %}" method="post">
+            <select name="filters">
+                <option selected>Filtros</option>
+                {% block searchbar_fields %}
+                
+                {% endblock %}
+            </select>
+            <input type="text" name="search_text" class="searchbar" placeholder="Buscar">
+        </form>
+    </div>
+{% endblock %}

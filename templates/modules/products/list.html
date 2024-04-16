@@ -1,0 +1,41 @@
+{% extends 'base/list.html' %}
+
+{% block create_new %}
+    <h2>Productos</h2>
+    <a href="/products-form">Crear</a>
+{% endblock %}
+
+{% block filter_form %}/filtered-products{% endblock %}
+{% block searchbar_fields %}
+    {% for filter_value, filter_name in filters.items() %}
+        <option value="{{filter_value}}">{{filter_name}}</option>
+    {% endfor %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="main--content--list">
+        {% if products %}
+            {% for product in products %}
+            <a href="#" class="card">
+                <div class="card--img">
+                    <img src="{{ url_for('static', filename='imgs/product.png') }}">
+                </div>
+                <div class="card--info">
+                    <p hidden>{{product.id}}</p>
+                    <h2>[{{product.reference}}] {{product.name}}<br>({{product.presentation}})</h2>
+                    <div class="card--info--details">
+                        <p>{{product.therapeutic_actions}}</p>
+                        <p>Lab: {{product.laboratory_id.name}}</p>
+                        <p class="details">Precio: ${{product.price}}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        {% else %}
+            <div class="no--content">
+                <img src="{{ url_for('static', filename='imgs/no-results.png')}}">
+                <p>No hay productos registrados</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

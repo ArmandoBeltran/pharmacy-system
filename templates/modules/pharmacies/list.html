@@ -1,0 +1,41 @@
+{% extends 'base/list.html' %}
+
+{% block create_new %}
+    <h2>Farmacias</h2>
+    <a href="/pharmacies-form">Crear</a>
+{% endblock %}
+
+{% block filter_form %}/filtered-pharmacies{% endblock %}
+{% block searchbar_fields %}
+    {% for filter_value, filter_name in filters.items() %}
+        <option value="{{filter_value}}">{{filter_name}}</option>
+    {% endfor %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="main--content--list">
+        {% if pharmacies %}
+            {% for pharmacy in pharmacies %}
+            <a href="#" class="card">
+                <div class="card--img">
+                    <img src="{{ url_for('static', filename='imgs/pharmacy.png') }}">
+                </div>
+                <div class="card--info">
+                    <p hidden>{{pharmacy.id}}</p>
+                    <h2>[{{pharmacy.code}}] {{pharmacy.name}}</h2>
+                    <div class="card--info--details">
+                        <p>{{pharmacy.address}}</p>
+                        <p>{{pharmacy.city}}</p>
+                        <p class="details">Número de empleados: {{pharmacy.n_employees}}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        {% else %}
+            <div class="no--content">
+                <img src="{{ url_for('static', filename='imgs/no-results.png')}}">
+                <p>No hay farmacias registradas</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

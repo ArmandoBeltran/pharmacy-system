@@ -1,0 +1,28 @@
+{% extends 'base/form.html' %}
+
+{% block form_title %}Crear nueva sucursal{% endblock %}
+
+{% block form_route %}/create-new-pharmacy{% endblock %}
+
+{% block form_img %}{{ url_for('static', filename='imgs/pharmacy.png') }}{% endblock %}
+{% block input_name_placeholder %}Escriba el nombre de la sucursal{% endblock %}
+
+{% block form_fields_left %}
+    <div class="form-field">
+        <label for="address">Dirección: </label>
+        <input type="text" name="address" placeholder="Escriba la dirección física de la sucursal" required>
+    </div>
+    <div class="form-field">
+        <label for="city">Ciudad: </label>
+        <input type="text" name="city" placeholder="Escriba la ciudad donde está la sucursal" required>
+    </div>
+{% endblock %}
+
+{% block form_fields_right %}
+    <div class="form-field">
+        <label for="code">Clave: </label>
+        <input type="text" name="code" placeholder="Escriba la clave de la sucursal" required>
+    </div>
+{% endblock %}
+
+{% block action_return %}/pharmacies{% endblock %}

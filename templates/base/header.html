@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <!-- Styles -->
+    {% block title %}
+
+    {% endblock %}
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header--title">
+            <img src="{{ url_for('static', filename='imgs/medicine.png')}}">
+            <h1>Sistema de Distribuidores Fármacos</h1>
+        </a>
+        <nav class="header--nav">
+            <ul>
+                <a href="/pharmacies" class="header--nav--item"><li>Farmacias</li></a>
+                <a href="/employees" class="header--nav--item"><li>Empleados</li></a>
+                <a href="/stock-lines" class="header--nav--item"><li>Inventarios</li></a>
+                <a href="/products" class="header--nav--item"><li>Productos</li></a>
+                <a href="/laboratories" class="header--nav--item"><li>Laboratorios</li></a>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main">
+        <div class="main--tools">
+            {% block tools %}
+
+            {% endblock %}
+        </div>
+
+        {% block main_content %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>

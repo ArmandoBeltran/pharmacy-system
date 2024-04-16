@@ -1,0 +1,41 @@
+{% extends 'base/form.html' %}
+
+{% block form_title %}Crear nuevo producto{% endblock %}
+
+{% block form_route %}/create-new-product{% endblock %}
+
+{% block form_img %}{{ url_for('static', filename='imgs/product.png') }}{% endblock %}
+{% block input_name_placeholder %}Escriba el nombre del producto{% endblock %}
+
+{% block form_fields_left %}
+    <div class="form-field">
+        <label for="presentation">Presentación: </label>
+        <input type="text" name="presentation" placeholder="Escriba la presentación" required>
+    </div>
+    <div class="form-field">
+        <label for="therapeutic_actions">Acciones<br>Terapéuticas: </label>
+        <input type="text" name="therapeutic_actions" placeholder="Escriba las acciones terapéuticas" required>
+    </div>
+{% endblock %}
+
+{% block form_fields_right %}
+    <div class="form-field">
+        <label for="reference">Clave: </label>
+        <input type="text" name="reference" placeholder="Escriba la clave del producto" required>
+    </div>
+    <div class="form-field">
+        <label for="price">Precio: </label>
+        <input type="text" name="price" placeholder="Escriba el precio" required>
+    </div>
+    <div class="form-field">
+        <label for="laboratory">Hecho por: </label>
+        <select name="laboratory" id="laboratory" required>
+            <option selected>Selecciona un laboratorio</option>
+            {% for laboratory in laboratories %}
+                <option value="{{laboratory.id}}">{{laboratory.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}
+
+{% block action_return %}/pharmacies{% endblock %}

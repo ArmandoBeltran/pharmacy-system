@@ -1,0 +1,40 @@
+{% extends 'base/list.html' %}
+
+{% block create_new %}
+    <h2>Laboratorios</h2>
+    <a href="/laboratories-form">Crear</a>
+{% endblock %}
+
+{% block filter_form %}/filtered-laboratories{% endblock %}
+{% block searchbar_fields %}
+    {% for filter_value, filter_name in filters.items() %}
+        <option value="{{filter_value}}">{{filter_name}}</option>
+    {% endfor %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="main--content--list">
+        {% if laboratories %}
+            {% for laboratory in laboratories %}
+            <a href="#" class="card">
+                <div class="card--img">
+                    <img src="{{ url_for('static', filename='imgs/laboratory.png') }}">
+                </div>
+                <div class="card--info">
+                    <p hidden>{{laboratory.id}}</p>
+                    <h2>{{laboratory.name}}</h2>
+                    <div class="card--info--details">
+                        <p>{{laboratory.address}}</p>
+                        <p>{{laboratory.phone}}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        {% else %}
+            <div class="no--content">
+                <img src="{{ url_for('static', filename='imgs/no-results.png')}}">
+                <p>No hay laboratorios registrados</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

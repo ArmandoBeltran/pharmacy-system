@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0; 
+    padding: 0;
+    font-family: "Roboto", sans-serif; 
+}
+
+.home__section {
+    margin: auto;
+    background-color: #176B87;
+    color: #EEF5FF;
+    height: 100vh;
+}
+
+.home--visuals {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 70%;
+}
+
+.home--visuals--text {
+    width: 350px;
+}
+
+.home--visuals--text h1{
+    font-size: 60px;
+    font-weight: 800;
+}
+
+.home--visuals--vector img {
+    width: 400px;
+    height: 400px;
+}
+
+.home--buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.home--buttons a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    color: #EEF5FF;
+}
+
+a:hover .home--button--image {
+    transform: scale(1.1);
+}
+
+.home--buttons p {
+    margin-top: 10px;
+}
+
+.home--button--image{
+    width: 100px;
+    height: 100px; 
+    border: 1px solid #2e819dab;
+    border-radius: 10px;
+    background-color: #2e819dab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.home--buttons img {
+    width: 70px;
+    width: 70px;
+}

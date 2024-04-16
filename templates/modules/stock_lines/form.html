@@ -1,0 +1,42 @@
+{% extends 'base/form.html' %}
+
+{% block form_title %}Crear nueva linea de inventario{% endblock %}
+
+{% block form_route %}/create-new-stock-line{% endblock %}
+
+{% block form_img %}{{ url_for('static', filename='imgs/inventory.png') }}{% endblock %}
+{% block input_name_placeholder %}Clave{% endblock %}
+
+{% block form_fields_left %}
+    <div class="form-field">
+        <label for="date">Fecha: </label>
+        <input type="date" name="date" placeholder="Escriba la fecha" required>
+    </div>
+    <div class="form-field">
+        <label for="stock">Cantidad: </label>
+        <input type="text" name="stock" placeholder="Escriba la cantidad del producto" required>
+    </div>
+{% endblock %}
+
+{% block form_fields_right %}
+    <div class="form-field">
+        <label for="pharmacy">Trabaja en: </label>
+        <select name="pharmacy" id="pharmacy" required>
+            <option selected>Selecciona una farmacia</option>
+            {% for pharmacy in pharmacies %}
+                <option value="{{pharmacy.id}}">{{pharmacy.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-field">
+        <label for="product">Producto: </label>
+        <select name="product" id="product">
+            <option selected>Seleccione un producto</option>
+            {% for product in products %}
+                <option value="{{product.id}}">{{product.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}
+
+{% block action_return %}/pharmacies{% endblock %}

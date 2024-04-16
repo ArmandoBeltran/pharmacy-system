@@ -1,0 +1,74 @@
+{% extends 'base/list.html' %}
+
+{% block create_new %}
+    <h2>Empleados</h2>
+    {% if pharmacies %}
+        <a href="/employees-form">Crear</a>
+    {% else %}
+        <a class="disabled">Crear</a>
+    {% endif %}
+{% endblock %}
+
+{% block filter_form %}/filtered-employees{% endblock %}
+{% block searchbar_fields %}
+    {% for filter_value, filter_name in filters.items() %}
+        <option value="{{filter_value}}">{{filter_name}}</option>
+    {% endfor %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="main--content--list--table">
+        <div class="content--list--headers--employees">
+            <ul>
+                <li>Código</li>
+                <li>Nombre</li>
+                <li>Apellido</li>
+                <li>Dirección</li>
+                <li>Posición</li>
+            </ul>
+        </div>
+        <div id="pharmacies-list" class="content--list--parent">
+            {% if pharmacies %}
+                {% for pharmacy_id, pharmacy_data in pharmacies.items() %}
+                    {% if pharmacy_data.get('employees')%}
+                    <li class="pharmacy-row" id="pharmacy-{{ pharmacy_id }}"> > {{ pharmacy_data.name }}</li>
+                    <div id="employees-{{ pharmacy_id }}" class="employee-list" style="display: none;">
+                        {% for employee in pharmacy_data.employees %}
+                            <li class="employee-row">
+                                <p>{{ employee.code }}</p>
+                                <p>{{ employee.name }}</p>
+                                <p>{{ employee.lastname }}</p>
+                                <p>{{ employee.address }}</p>
+                                <p>{{ employee.role }}</p>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+            <div class="no--content">
+                <img src="{{ url_for('static', filename='imgs/no-results.png')}}">
+                <p>No hay empleados registradas</p>
+            </div>
+            {% endif %}
+        </div>     
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var pharmacy_rows = document.querySelectorAll(".pharmacy-row");
+            
+            pharmacy_rows.forEach(function(row) {
+                row.addEventListener("click", function() {
+                    var pharmacy_id = this.id.split("-")[1];
+                    var employee_list = document.getElementById("employees-" + pharmacy_id);
+                    
+                    if (employee_list.style.display === "none") {
+                        employee_list.style.display = "block";
+                    } else {
+                        employee_list.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>    
+{% endblock %}
