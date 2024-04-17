@@ -130,15 +130,6 @@ def create_new_employee():
     new_employee = Employee(False, code, name, lastname, address, role, pharmacy_id)
     new_employee._save_new()
     
-    filters = {
-        'code' : "Clave", 
-        'name' : "Nombre",
-        'lastname' : "Apellido",
-        'address' : "Dirección", 
-        'role' : "Posición", 
-        'pharmacy_id' : "Farmacia"
-    }
-    
     return redirect(url_for("employees_form"))
     
 
@@ -161,7 +152,7 @@ def get_stock_lines():
             'name' : pharmacy.name, 
             'products' : {
                 product.id : {
-                    'name' : product.name,
+                    'name' : f"{product.name} - {product.presentation}",
                     'lines': [stock_line for stock_line in StockLine()._get_lines_(pharmacy.id, product.id)]
                 }
                 for product in products
@@ -169,8 +160,6 @@ def get_stock_lines():
         }
         for pharmacy in pharmacies
     }
-    
-    print(pharmacies)
     
     return render_template('modules/stock_lines/list.html', pharmacies = pharmacies, filters = filters)
 
@@ -195,7 +184,7 @@ def get_filtered_stock_lines():
                 'name' : pharmacy.name, 
                 'products' : {
                     product.id : {
-                        'name' : product.name,
+                        'name' : f"{product.name} - {product.presentation}",
                         'lines': [stock_line for stock_line in StockLine()._get_lines_(pharmacy.id, product.id)]
                     }
                     for product in products
@@ -211,7 +200,7 @@ def get_filtered_stock_lines():
                 'name' : pharmacy.name, 
                 'products' : {
                     product.id : {
-                        'name' : product.name,
+                        'name' : f"{product.name} - {product.presentation}",
                         'lines': [stock_line for stock_line in StockLine()._get_lines_(pharmacy.id, product.id)]
                     }
                     for product in products
@@ -227,7 +216,7 @@ def get_filtered_stock_lines():
                 'name' : pharmacy.name, 
                 'products' : {
                     product.id : {
-                        'name' : product.name,
+                        'name' : f"{product.name} - {product.presentation}",
                         'lines': [stock_line for stock_line in StockLine()._get_filtered_lines(pharmacy.id, product.id, field, value)]
                     }
                     for product in products
@@ -324,7 +313,7 @@ def get_laboratories():
     
     return render_template('modules/laboratories/list.html', laboratories = laboratories, filters = filters)
 
-@app.route('/filtered-laboratories')
+@app.route('/filtered-laboratories', methods=['POST'])
 def get_filtered_laboratories():
     field = request.form.get("filters")
     value = request.form.get("search_text")

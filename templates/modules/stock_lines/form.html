@@ -33,7 +33,7 @@
         <select name="product" id="product">
             <option selected>Seleccione un producto</option>
             {% for product in products %}
-                <option value="{{product.id}}">{{product.name}}</option>
+                <option value="{{product.id}}">{{product.name}} - {{product.presentation}}</option>
             {% endfor %}
         </select>
     </div>

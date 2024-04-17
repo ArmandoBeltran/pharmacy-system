@@ -19,7 +19,7 @@ class Laboratory:
     
     def _get_filtered_laboratories(self, field, value): 
         laboratories = []
-        data = DataBase().select_where("Laboratories", field, value)
+        data = DataBase().select_where("Laboratories", f"laboratory_{field}", value)
         for laboratory in data: 
             laboratory_obj = Laboratory(*laboratory)
             laboratories.append(laboratory_obj)

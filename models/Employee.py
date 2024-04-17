@@ -1,4 +1,5 @@
 from . import DataBase
+from . import Pharmacy
 
 class Employee: 
     
@@ -37,3 +38,4 @@ class Employee:
     
     def _save_new(self): 
         DataBase().insert("employee_", "Employees", self)
+        Pharmacy().add_n_employees(self.pharmacy_id)

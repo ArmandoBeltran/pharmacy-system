@@ -26,10 +26,23 @@ class DataBase:
             VALUES ({values})
             '''
         )
-        print(f'''
-            INSERT INTO {table} ({fields})
-            VALUES ({values})
-            ''')
+        self.close_connection(connection)
+        
+    def update(self, table, field, value, condition_field, condition_value): 
+        connection, cursor = self.connect_to_db()
+        
+        set_condition   = f"SET {field} = '{value}'" if not isinstance(condition_value, (int, float)) \
+            else f"SET {field} = {value}"
+        where_condition = f"WHERE {condition_field} = '{condition_value}'" if not isinstance(condition_value, (int, float)) \
+            else f"WHERE {condition_field} = {condition_value}"
+        
+        cursor.execute(
+            f'''
+            UPDATE {table}
+            {set_condition}
+            {where_condition}
+            '''
+        )
         self.close_connection(connection)
         
     def select_all(self, table): 
